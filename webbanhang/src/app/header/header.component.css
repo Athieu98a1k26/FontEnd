@@ -1,0 +1,123 @@
+
+
+/*BEGIN-CSS:TOPLINK
+==================================================================================================================*/
+.top-link {
+  background: #f5f5f5;
+  margin-bottom: 0;
+  /*display-menu*/
+}
+.top-link .topmenu-contact {
+  color: #ff3366;
+}
+.top-link .topmenu-contact li {
+  padding: 4px 0;
+}
+.top-link ul {
+  margin: 0;
+}
+.top-link ul li {
+  float: left;
+  position: relative;
+  line-height: 26px;
+}
+.top-link ul li a {
+  color: #aaaaaa;
+  display: block;
+  padding: 7px 10px;
+  font-size: 12px;
+  float: left;
+}
+.top-link ul li a:hover {
+  color: #958457;
+}
+.top-link ul li:last-child a {
+  border: none;
+}
+.top-link ul .account-info a:first-child {
+  padding-right: 0;
+  color: #958457;
+}
+.top-link .show-mobile {
+  float: right;
+  position: relative;
+}
+.top-link .show-mobile .quick-user,
+.top-link .show-mobile .quick-access {
+  float: left;
+}
+.top-link .show-mobile .quickaccess-toggle {
+  cursor: pointer;
+  font-size: 14px;
+  height: 35px;
+  text-align: center;
+  width: 35px;
+  padding: 10px;
+  color: #aaaaaa;
+}
+.top-link .show-mobile .quickaccess-toggle:hover {
+  color: #958457;
+}
+.top-link .show-mobile .inner-toggle {
+  background-color: #f6f6f6;
+  border: medium none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.176);
+  display: block;
+  left: auto;
+  margin: 0;
+  min-width: 150px;
+  padding: 10px;
+  position: absolute;
+  right: 5px;
+  top: 115%;
+  z-index: 999;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+.top-link .show-mobile .inner-toggle ul {
+  float: left;
+}
+.top-link .show-mobile .inner-toggle ul li {
+  width: 100%;
+}
+.top-link .show-mobile .inner-toggle ul li a {
+  padding: 5px 0;
+  border-right: none;
+  display: block;
+}
+.top-link .quick-user:hover .inner-toggle {
+  opacity: 1;
+  visibility: visible;
+}
+.top-link .quick-access:hover .inner-toggle {
+  opacity: 1;
+  visibility: visible;
+}
+/*END-CSS:TOPLINK
+==================================================================================================================*/
+.textcart{
+  text-align:center;
+  margin-top: 3px;
+  color: white;
+}
+
+.notification{
+  cursor: pointer;
+}
+#dropth{
+  display: block;
+}
+#dropdownMenuLink{
+  color: #ffffff;
+}
+.dropdown-menu{
+  width: 350px;
+  text-align: center;
+}
+.text-noty{
+  margin-top: 20px;
+}

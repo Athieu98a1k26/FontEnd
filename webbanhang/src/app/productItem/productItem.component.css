@@ -1,0 +1,13 @@
+.ctth{
+  max-height: 235px;
+  width: 90%;
+}
+.heart{
+  cursor: pointer;
+}
+@media (max-width: 480px){
+  .ctth{
+    max-height: 200px;
+    width: 90%;
+  }
+}

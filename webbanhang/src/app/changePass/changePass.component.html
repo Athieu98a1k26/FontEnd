@@ -1,0 +1,64 @@
+
+<div class="main">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <app-menuProfileUser [lstIdShow]="[1,2,3,4]" [pageActive]="1"></app-menuProfileUser>
+      </div>
+      <div class="col-md-9">
+
+        <app-breadcrumb [lstBreadCrum]="lstBreadCrumb" [hiden]="false"></app-breadcrumb>
+
+        <div class="register-content clearfix ng-scope">
+          <h1 class="page-heading"><span>Thay đổi mật khẩu</span></h1>
+          <!-- ngIf: IsError -->
+          <!-- ngIf: IsSuccess -->
+          <!-- ngIf: InValid -->
+          <div class="col-md-10 col-md-offset-2 col-xs-12 col-sm-12 col-xs-offset-0 col-sm-offset-0">
+            <form class="form-horizontal" [formGroup]="form" method="post" (submit)="Save()">
+              <div class="form-group">
+                <label for="passWord" class="col-sm-3">Mật khẩu cũ<span class="warning">(*)</span></label>
+                <div class="col-sm-9">
+                  <input type="password" class="form-control" id="passWord" formControlName="passWord"
+                    [(ngModel)]="Item.passWord" placeholder="Mật khẩu">
+                  <div class="warning"
+                    *ngIf="this.form.controls.passWord.errors?.required && (this.form.controls.passWord.dirty||this.form.touched)">
+                    Vui lòng nhập mật khẩu!</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="newPassWord" class="col-sm-3">Mật khẩu mới<span class="warning">(*)</span></label>
+                <div class="col-sm-9">
+                  <input type="password" class="form-control" id="newPassWord" formControlName="newPassWord"
+                    [(ngModel)]="Item.newPassWord" placeholder="Mật khẩu mới">
+                  <div class="warning"
+                    *ngIf="this.form.controls.newPassWord.errors?.required && (this.form.controls.newPassWord.dirty||this.form.touched)">
+                    Vui lòng nhập mật khẩu mới!</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="reNewPassWord" class="col-sm-3">Nhập lại mật khẩu mới<span class="warning">(*)</span></label>
+                <div class="col-sm-9">
+                  <input type="password" class="form-control" id="reNewPassWord" formControlName="reNewPassWord"
+                    [(ngModel)]="Item.reNewPassWord" placeholder="Nhập lại mật khẩu mới">
+                  <div class="warning"
+                    *ngIf="this.form.controls.reNewPassWord.errors?.required  && (this.form.controls.reNewPassWord.dirty||this.form.touched)">
+                    Vui lòng nhập lại mật khẩu!</div>
+                  <div class="warning"
+                    *ngIf="this.form.hasError('notSame') && (Item.reNewPassWord!='')  && (this.form.controls.reNewPassWord.dirty||this.form.touched)">
+                    Mật khẩu không trùng nhau!</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-8">
+                  <button [disabled]="!this.form.valid" type="submit" class="btn btn-primary">Cập nhật</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

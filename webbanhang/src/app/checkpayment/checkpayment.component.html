@@ -1,0 +1,30 @@
+<div class="main">
+  <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+
+        </div>
+          <div class="col-md-9">
+
+            <app-breadcrumb [lstBreadCrum]="lstBreadCrumb" [hiden]="false"></app-breadcrumb>
+
+              <div class="order-tracking-content clearfix" >
+                  <h1 class="page-heading"><span>Kiểm tra đơn hàng</span></h1>
+                  <div class="order-tracking-block">
+                      <!-- ngIf: Id<0 -->
+                      <form class="form-inline order-input">
+                          <div class="form-group">
+                              <label>Nhập mã đơn hàng</label>
+                              <input type="text" (keyup)="GetValue($event)" class="form-control ng-pristine"
+                                  placeholder="Mã số đơn hàng (VD:123456789)">
+
+                              <button (click)="Search()" class="btn btn-primary">Xem ngay</button>
+                          </div>
+                      </form>
+                      <!-- ngIf: Id>0 -->
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

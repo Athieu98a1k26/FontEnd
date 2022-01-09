@@ -1,0 +1,60 @@
+
+<nav *ngIf="total>0">
+
+  <ul class="pagination ">
+    <ng-container *ngIf="page==1; then renderFirstOne else renderFirstmultiple">
+    </ng-container>
+
+    <ng-template #renderFirstOne>
+        <li class="pagination_home disabled">
+          <a href="#" title="Trang đầu">Trang đầu</a>
+        </li>
+        <li class="pagination_home disabled">
+          <a href="#" title="Trước">trước</a>
+      </li>
+    </ng-template>
+    <ng-template #renderFirstmultiple>
+      <li class="pagination_home">
+        <a href="#" title="Trang đầu"  (click)="getDataPage(1)">Trang đầu</a>
+      </li>
+      <li class="pagination_home">
+        <a href="#" title="Trước" (click)="getDataPage(page - 1)">trước</a>
+      </li>
+
+    </ng-template>
+    <ng-template ngFor let-item [ngForOf]="totalArray" let-i="index">
+      <ng-container *ngIf="item == page; then renderActive else renderNotactive">
+      </ng-container>
+      <ng-template #renderActive>
+        <li class="active"><span (click)="getDataPage(item)">{{item}}</span></li>
+    </ng-template>
+    <ng-template #renderNotactive>
+
+      <li>
+        <a (click)="getDataPage(item)" title="{{item}}">{{item}}</a>
+      </li>
+    </ng-template>
+    </ng-template>
+    <ng-container *ngIf="page == pageLast; then renderLastOne else renderLastmultiple">
+    </ng-container>
+    <ng-template #renderLastOne>
+      <li class="pagination_nextHome disabled">
+        <a title="sau">sau</a>
+      </li>
+      <li class="pagination_nextHome disabled">
+        <a  title="Trang cuối">Trang cuối</a>
+    </li>
+    </ng-template>
+    <ng-template #renderLastmultiple>
+
+      <li class="pagination_nextHome">
+        <a title="sau" (click)="getDataPage(page+1)">sau</a>
+      </li>
+      <li class="pagination_nextHome">
+        <a title="Trang cuối" (click)="getDataPage(pageLast)">Trang cuối</a>
+    </li>
+
+    </ng-template>
+
+  </ul>
+</nav>

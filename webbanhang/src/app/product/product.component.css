@@ -1,0 +1,16 @@
+.empty{
+  text-align: center;
+}
+
+.notfind{
+  text-align: center;
+  font-size: 20px;
+  color: #aaaaaa;
+}
+.sortby{
+  width: 169px;
+
+}
+#pagination{
+  margin-bottom: 20px;
+}

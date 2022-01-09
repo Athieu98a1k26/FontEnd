@@ -1,0 +1,69 @@
+
+:host ::ng-deep .ngxImageZoomContainer{
+ margin: 0px !important;
+ width: inherit !important;
+ height: inherit !important;
+}
+.sale{
+  margin-right: 15px;
+    font-size: .75rem;
+    color: #fff;
+    text-transform: uppercase;
+    background: #ee4d2d;
+    border-radius: 2px;
+    padding: 2px 4px;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+}
+.product-image{
+  margin-bottom: 10px;
+  min-width: 43%;
+}
+.f-item{
+  margin-top: 5px;
+}
+.rating{
+  background-color: #faf6f6;
+  color: #dc4911;
+  padding: 20px;
+}
+.numberStar{
+  font-size: 22px;
+}
+
+.btnStar:active{
+  border: 1px solid green;
+  color: green;
+  outline: none;
+}
+.btnStar:focus{
+
+  border: 1px solid #dc4911;;
+  outline: none;
+}
+
+.red{
+  color:red;
+}
+.cuser{
+  color: #b8b7ba;
+    font-size: 24px;
+    margin-right: 15px;
+}
+.comment{
+  margin-top: 5px;
+  padding: 10px 20px 10px 20px;
+}
+.emptyReview{
+  text-align: center;
+}
+.emptyReview div{
+  color: #9c9a9e;
+}
+.text-black-50{
+  color: #afadad;
+}
+.name{
+  color: #923030;
+}

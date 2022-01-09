@@ -1,0 +1,156 @@
+
+
+
+<container-element [ngSwitch]="typeItem">
+  <!-- the same view can be shown in more than one case -->
+  <some-element *ngSwitchCase="'trang-chu'">
+    <div class="left-block ">
+      <img title="{{item.name}}"
+        [src]="this.urlHost+'/'+item.urlFileFirst">
+      <div class="quick-view">
+        <a title="Thêm vào danh sách yêu thích" class="heart" (click)="AddItemWishList(item.id,item.name,item.urlFileFirst,item.code)"></a>
+        <a title="Xem chi tiết" class="compare"
+          routerLink="/chi-tiet-san-pham"  [queryParams]="{p:item.code}"></a>
+        <!-- <a href="javascript:void(0);" class="qv-e-button btn-quickview-1 search" title="Xem nhanh"
+          data-handle="/chi-tiet-san-pham/noi-com-dien-panasonic-sr-ga721wra.html"></a> -->
+      </div>
+      <div class="add-to-cart">
+        <a class="add-to-car" href="javascript:void(0);" (click)="AddItemCart(item.id,item.name)">Thêm vào
+          giỏ</a>
+      </div>
+      <div *ngIf="item.sale>0" class="price-percent-reduction2 ng-binding">
+        Sale
+        <br>-{{item.sale}}<strong>%</strong>
+      </div>
+    </div>
+    <div class="right-block">
+      <h5 class="product-name">
+        <a title="{{item.name}}"
+        routerLink="/chi-tiet-san-pham"
+        [queryParams]="{p:item.code}"
+          class="ng-binding">{{item.nameSplit}}</a>
+          <app-Star [numberStar]="item.star"></app-Star>
+        </h5>
+
+          <div *ngIf="item.sale>0; then sale else notsale"></div>
+          <ng-template #sale>
+            <div class="content_price ng-scope">
+              <span
+                class="price product-price ng-binding ng-scope">
+                {{ item.promotionalPrice.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}}
+              </span>
+              <span
+                class="price old-price ng-binding ng-scope"
+                >{{ item.price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}}
+              </span>
+            </div>
+          </ng-template>
+          <ng-template #notsale>
+
+            <div class="content_price ng-scope">
+              <span
+                class="price product-price ng-binding ng-scope">
+                {{ item.price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}}
+              </span>
+            </div>
+          </ng-template>
+    </div>
+
+  </some-element>
+  <some-element *ngSwitchCase="'san-pham'">
+    <div class="left-block">
+      <img
+          class="img-responsive ctth" title="{{item.name}}"
+          src="{{this.urlHost}}/{{item.urlFileFirst}}">
+      <div class="quick-view">
+        <a title="Thêm vào danh sách yêu thích" class="heart" (click)="AddItemWishList(item.id,item.name,item.urlFileFirst,item.code)"></a>
+        <a title="Xem chi tiết" class="compare"
+          routerLink="/chi-tiet-san-pham" [queryParams]="{p:item.code}"></a>
+        <!-- <a href="javascript:void(0);" class="qv-e-button btn-quickview-1 search" title="Xem nhanh"
+          data-handle="/san-pham/noi-com-dien-panasonic-sr-ga721wra.html"></a> -->
+      </div>
+      <div class="add-to-cart">
+        <a class="add-to-car" href="javascript:void(0);" (click)="AddItemCart(item.id,item.name)">Thêm vào
+          giỏ</a>
+      </div>
+      <div *ngIf="item.sale>0" class="price-percent-reduction2 ng-binding">
+        Sale
+        <br>-{{item.sale}}<strong>%</strong>
+      </div>
+    </div>
+    <div class="right-block">
+      <h5 class="product-name">
+        <a title="{{item.name}}"
+        routerLink="/chi-tiet-san-pham"
+          [queryParams]="{p:item.code}"
+          class="ng-binding">{{item.nameSplit}}</a>
+          <app-Star [numberStar]="item.star"></app-Star>
+        </h5>
+
+          <div *ngIf="item.sale>0; then sale else notsale"></div>
+          <ng-template #sale>
+            <div class="content_price ng-scope">
+              <span
+                class="price product-price ng-binding ng-scope">
+                {{ item.promotionalPrice.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}}
+              </span>
+              <span
+                class="price old-price ng-binding ng-scope"
+                >{{ item.price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}}
+              </span>
+            </div>
+          </ng-template>
+          <ng-template #notsale>
+
+            <div class="content_price ng-scope">
+              <span
+                class="price product-price ng-binding ng-scope">
+                {{ item.price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}}
+              </span>
+            </div>
+          </ng-template>
+    </div>
+  </some-element>
+
+  <some-element *ngSwitchCase="'right-san-pham'">
+
+      <div class="products-block-left">
+        <a title="Xem chi tiết" routerLink="/chi-tiet-san-pham" [queryParams]="{p:item.code}">
+          <img
+            class="img-responsive" alt="{{item.name}}"
+            src="{{this.urlHost}}/{{item.urlFileFirst}}"></a>
+      </div>
+      <div class="products-block-right">
+        <p class="product-name">
+          <a title="Xem chi tiết" routerLink="/chi-tiet-san-pham" [queryParams]="{p:item.code}">{{item.name}}</a>
+        </p>
+        <p class="product-price">
+          <span *ngIf="item.sale>0; then sale else notsale"></span>
+          <ng-template #sale>
+            <div class="content_price ng-scope">
+              <span
+                class="price product-price ng-binding ng-scope">
+                {{ item.promotionalPrice.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}}
+              </span>
+              <span
+                class="price old-price"
+                >{{ item.price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}}
+              </span>
+            </div>
+          </ng-template>
+          <ng-template #notsale>
+
+            <div class="content_price ng-scope">
+              <span
+                class="price product-price">
+                {{ item.price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}}
+              </span>
+            </div>
+          </ng-template>
+        </p>
+        <app-Star [numberStar]="item.star"></app-Star>
+      </div>
+
+  </some-element>
+
+</container-element>

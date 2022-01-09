@@ -1,0 +1,224 @@
+<div class="slideshow">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-6 p-0">
+        <div id="home-slider">
+          <div class="header-top-right">
+            <div class="homeslider">
+              <div class="bx-wrapper">
+                <div class="bx-viewport">
+                  <ul id="contenhomeslider">
+                    <owl-carousel-o *ngIf="lstBannerTrangChu.length>0" [options]="customOptionsBanner">
+
+                      <ng-container *ngFor="let banner of lstBannerTrangChu">
+                        <ng-template carouselSlide [id]="banner.id">
+                          <li>
+                            <a routerLink="/{{banner.url}}">
+                              <img alt="{{banner.name}}" src="{{urlHost}}/{{banner.urlFile}}">
+                            </a>
+                          </li>
+                        </ng-template>
+                      </ng-container>
+
+                    </owl-carousel-o>
+
+
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Begin-->
+        <!--End-->
+      </div>
+      <div *ngIf="lstBannerTrangChuRight.length>1" class="col-md-3 p-0">
+        <img alt="{{lstBannerTrangChuRight[0].name}}" src="{{urlHost}}/{{lstBannerTrangChuRight[0].urlFile}}">
+        <img alt="{{lstBannerTrangChuRight[1].name}}" src="{{urlHost}}/{{lstBannerTrangChuRight[1].urlFile}}">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="adv">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <!--Begin-->
+        <div class="product-content ng-scope">
+          <h2 class="page-heading">
+            <span class="page-heading-title">
+              Sản phẩm mua nhiều nhất
+            </span>
+          </h2>
+          <div class="latest-deals-product">
+            <ul class="product-list">
+
+              <owl-carousel-o *ngIf="lstProductIsMostBuy.length>0" [options]="customOptions">
+
+                <ng-container *ngFor="let item of lstProductIsMostBuy">
+                  <ng-template carouselSlide [id]="item.id">
+                    <li [ngClass]="item.sale>0?'saleproduct':''">
+                      <app-productItem [item]="item" [typeItem]="'trang-chu'"></app-productItem>
+                    </li>
+                  </ng-template>
+                </ng-container>
+
+              </owl-carousel-o>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="content-page">
+  <div class="container">
+    <div class="category-featured featured2">
+      <nav class="navbar nav-menu show-brand">
+        <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-brand"><a href="#">Sản phẩm tryền thống</a></div>
+          <span class="toggle-menu" data-toggle="collapse" data-target="#navbarToggleExternalContent"></span>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="navbarToggleExternalContent">
+            <ul class="nav navbar-nav">
+              <li class="active"><a data-toggle="tab" (click)="GetListProduct('')" href="#">Tất cả sản phẩm</a></li>
+              <li><a class="sub" data-toggle="tab" (click)="GetListProduct('gio-tre')" href="#">Giỏ tre</a></li>
+              <li><a class="sub" data-toggle="tab" (click)="GetListProduct('gio-guot')" href="#">Giỏ guột</a></li>
+              <li><a class="sub" data-toggle="tab" (click)="GetListProduct('den-tre')" href="#">Đèn tre</a></li>
+              <li><a class="sub" data-toggle="tab"  (click)="GetListProduct('non-la')" href="#">Nón lá</a></li>
+              <li><a class="sub" data-toggle="tab" (click)="GetListProduct('non-luoi')" href="#">Nón lưới</a></li>
+              <li><a class="sub" data-toggle="tab" (click)="GetListProduct('non-tre')" href="#">Nón tre</a></li>
+              <li><a class="sub" data-toggle="tab" (click)="GetListProduct('choi-rom')" href="#">Chổi rơm</a></li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+      <div class="product-featured clearfix">
+        <div class="row">
+
+          <div class="col-sm-12 col-right-tab">
+            <div class="product-featured-tab-content">
+              <div class="tab-container">
+                <div class="tab-panel active" id="tab_2">
+                  <ul class="product-list row">
+
+                    <li [ngClass]="item.sale>0?'saleproduct':''" class="col-md-3 col-sm-3" *ngFor="let item of lstProduct; let i=index">
+                      <app-productItem [item]="item" [typeItem]="'trang-chu'"></app-productItem>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+<div class="container">
+<!--Begin-->
+<div class="services2">
+  <ul>
+      <li class="col-xs-12 col-sm-6 col-md-4 services2-item">
+          <div class="service-wapper">
+              <div class="row">
+                  <div class="col-sm-6 image">
+                      <div class="icon">
+                          <img src="/assets/icon/icon-s1.png" alt="service">
+                      </div>
+                      <h3 class="title"><a href="#">Giá trị lớn</a></h3>
+                  </div>
+                  <div class="col-sm-6 text">
+                      Chúng tôi cung cấp giá cả cạnh tranh nhất trên từng sản phẩm, phù hợp với mọi túi tiền.
+                  </div>
+              </div>
+          </div>
+      </li>
+      <li class="col-xs-12 col-sm-6 col-md-4 services2-item">
+          <div class="service-wapper">
+              <div class="row">
+                  <div class="col-sm-6 image">
+                      <div class="icon">
+                          <img src="/assets/icon/icon-s2.png" alt="service">
+                      </div>
+                      <h3 class="title"><a href="#">Giao hàng</a></h3>
+                  </div>
+                  <div class="col-sm-6 text">
+                      Giao hàng tận nơi, sản phẩm sẽ có mặt tại nhà bạn từ 3 đến 5 ngày làm việc.
+                  </div>
+              </div>
+          </div>
+      </li>
+      <li class="col-xs-12 col-sm-6 col-md-4 services2-item">
+          <div class="service-wapper">
+              <div class="row">
+                  <div class="col-sm-6 image">
+                      <div class="icon">
+                          <img src="/assets/icon/icon-s3.png" alt="service">
+                      </div>
+                      <h3 class="title"><a href="#">Sản phẩm</a></h3>
+                  </div>
+                  <div class="col-sm-6 text">
+                      Sản phẩm chính hãng, bảo hành trên toàn quốc.
+                  </div>
+              </div>
+          </div>
+      </li>
+      <li class="col-xs-12 col-sm-6 col-md-4 services2-item">
+          <div class="service-wapper">
+              <div class="row">
+                  <div class="col-sm-6 image">
+                      <div class="icon">
+                          <img src="/assets/icon/icon-s4.png" alt="service">
+                      </div>
+                      <h3 class="title"><a href="#">Hổ trợ</a></h3>
+                  </div>
+                  <div class="col-sm-6 text">
+                      Hổ trợ 24/7. <br>Phone: +84 908 77 00 95.<br>Emal: info@gmail.com.vn
+                  </div>
+              </div>
+          </div>
+      </li>
+      <li class="col-xs-12 col-sm-6 col-md-4 services2-item">
+          <div class="service-wapper">
+              <div class="row">
+                  <div class="col-sm-6 image">
+                      <div class="icon">
+                          <img src="/assets/icon/icon-s5.png" alt="service">
+                      </div>
+                      <h3 class="title"><a href="#">Ứng dụng</a></h3>
+                  </div>
+                  <div class="col-sm-6 text">
+                      Cài đặt ứng dụng khi mua hàng sẽ được giảm giá đặc biệt từ 5 đến 10%.
+                  </div>
+              </div>
+          </div>
+      </li>
+      <li class="col-xs-12 col-sm-6 col-md-4 services2-item">
+          <div class="service-wapper">
+              <div class="row">
+                  <div class="col-sm-6 image">
+                      <div class="icon">
+                          <img src="/assets/icon/icon-s6.png" alt="service">
+                      </div>
+                      <h3 class="title"><a href="#">Thanh toán</a></h3>
+                  </div>
+                  <div class="col-sm-6 text">
+                      Thanh toán khi nhận hàng. <br>Phương thức thanh toán đa dạng
+                  </div>
+              </div>
+          </div>
+      </li>
+  </ul>
+</div>
+<!--End-->
+</div>

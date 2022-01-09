@@ -1,0 +1,82 @@
+<div id="collection">
+  <div class="main">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9">
+          <app-breadcrumb [lstBreadCrum]="lstBreadCrumb" [hiden]="false"></app-breadcrumb>
+          <div id="view-product-list" class="view-product-list">
+            <h2 class="page-heading">
+              <span class="page-heading-title" [innerHTML]="this.lstBreadCrumb.length>0?this.lstBreadCrumb[0].name:''"></span>
+            </h2>
+            <ul class="display-product-option">
+              <li class="view-as-grid selected">
+                <span>grid</span>
+              </li>
+              <li class="view-as-list">
+                <span>list</span>
+              </li>
+            </ul>
+            <div class="browse-tags">
+              <span>Sắp xếp theo:</span>
+              <span class="custom-dropdown custom-dropdown--white">
+                <ng-select class="form-select" ngClass="sortby" [items]="lstSearchBy"
+
+                  bindLabel="name"
+                  bindValue="id"
+                  notFoundText="Không tìm thấy kết quả"
+                  (change)="GetProductSort($event)"
+                  [(ngModel)]="ItemRequest.order">
+                </ng-select>
+
+              </span>
+            </div>
+            <!-- PRODUCT LIST -->
+            <ng-container *ngIf="this.lstProduct.length>0; then thenTemplate; else elseTemplate"></ng-container>
+            <ng-template #thenTemplate>
+              <ul class="row product-list filter grid">
+                <li class="col-md-4 col-sm-6 col-xs-12" *ngFor="let item of lstProduct">
+                  <div class="product-container product-resize fixheight" style="height: 299px;">
+                    <app-productItem [item]="item" [typeItem]="'san-pham'"></app-productItem>
+
+                  </div>
+                </li>
+              </ul>
+            </ng-template>
+            <ng-template #elseTemplate>
+              <div class="empty">
+                <img src="/assets/icon/box.png">
+              </div>
+              <div class="notfind" [innerHTML]="strNotFind"></div>
+            </ng-template>
+
+
+            <!-- ./PRODUCT LIST -->
+          </div>
+          <div class="col-md-12 content_sortPagiBar pagi">
+            <div id="pagination" class="clearfix">
+              <app-pagination (onPaginationChange)="onPaginationChange($event)" [pageLast]="pageLast"
+              [page]="ItemRequest.page" [take]="ItemRequest.take" [totalArray]="totalArray" [total]="total" ></app-pagination>
+            </div>
+        </div>
+          <!--Template--
+--End-->
+        </div>
+        <div class="col-md-3">
+
+          <div id="left_column">
+            <div class="block left-module">
+              <p class="title_block">Sản phẩm Hot</p>
+              <div class="block_content">
+                <ul class="products-block best-sell">
+                  <li class="clearfix" *ngFor="let item of lstProductIsMostBuy">
+                    <app-productItem [item]="item" [typeItem]="'right-san-pham'"></app-productItem>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

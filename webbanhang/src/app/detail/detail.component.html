@@ -1,0 +1,251 @@
+<div id="product">
+  <div class="main">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9">
+
+          <app-breadcrumb [lstBreadCrum]="lstBreadCrumb" [nameDetail]="nameDetail" [hiden]="false"></app-breadcrumb>
+          <div class="product-detail clearfix relative ng-scope">
+            <!--Begin-->
+            <div class="product-block clearfix">
+              <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12 product-image clearfix">
+
+                  <lib-ngx-image-zoom [thumbImage]=imgProductCurrent [fullImage]=imgProductCurrent [magnification]="1"
+                    [zoomMode]="zoomMode" [enableLens]="true"></lib-ngx-image-zoom>
+
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12 clearfix">
+                  <h2 class="ng-binding">{{ProductItem.name}}</h2>
+                  <!-- ngIf: IsTrackingInventory==false||AllowPurchaseWhenSoldOut==true || (IsTrackingInventory&&AllowPurchaseWhenSoldOut==false&&Quantity>0) -->
+                  <div class="price ng-scope">
+                    <div *ngIf="ProductItem.sale>0; then sale else notsale"></div>
+                    <ng-template #sale>
+                      <div *ngIf="ProductItem.sale>0">
+                        <span class="price-new ng-binding">
+                          {{ ProductItem.promotionalPrice?.toLocaleString('it-IT', {style : 'currency', currency :
+                          'VND'})}}
+                        </span>
+                        <span class="price-old ng-binding">{{ ProductItem.price?.toLocaleString('it-IT', {style :
+                          'currency', currency : 'VND'})}}
+                        </span>
+                      </div>
+                    </ng-template>
+                    <ng-template #notsale>
+
+                      <div class="content_price ng-scope">
+                        <span class="price product-price ng-binding ng-scope">
+                          {{ ProductItem.price?.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}}
+                        </span>
+                      </div>
+                    </ng-template>
+                    <span *ngIf="ProductItem.sale>0" class="sale">
+                      {{ProductItem.sale}}% GIẢM
+                    </span>
+                    <app-Star style="display:inline-block" [numberStar]="ProductItem.star"></app-Star>
+                  </div>
+                  <div>
+                  </div>
+                  <div class="des ng-binding" [innerHTML]="ProductItem.description">
+                  </div>
+
+                  <!-- ngRepeat: item in ProductOptions -->
+                  <div class="clearfix">
+                    <label>Số lượng</label>
+
+                    <div class="f-item">
+                      <app-Couter (OnChangeCouter)="OnChangeCouter($event)" [countItem]="countItem"
+                        [quantity]="ProductItem.quantity"></app-Couter>
+                    </div>
+
+                  </div>
+                  <div class="action-cart">
+                    <a href="javascript:void(0)" (click)="AddToCart()" class="btn btn-default"><i
+                        class="fa fa-shopping-cart"></i> Thêm giỏ hàng</a>
+                    &nbsp; &nbsp;
+                    <a href="javascript:void(0)" (click)="BuyProduct()" class="btn btn-primary"><i
+                        class="fa fa-check"></i> Mua ngay</a>
+                  </div>
+
+                  <div class="call">
+                    <p class="title">Để lại số điện thoại, chúng tôi sẽ tư vấn ngay</p>
+                    <div class="input">
+                      <div class="input-group">
+                        <input class="form-control" (keyup)="GetPhone($event,ProductItem.id)"
+                          placeholder="Nhập số điện thoại..." type="text">
+
+                        <span class="input-group-btn">
+                          <button class="btn btn-primary" (click)="AddOrUpdatePhone()" type="button"
+                            [disabled]="this.IsShowErrorPhone || this.ItemCallPhone.phone==''"><i
+                              class="fa fa-phone"></i>
+                            Gọi lại cho tôi
+                          </button>
+                        </span>
+                      </div>
+
+                    </div>
+                    <div *ngIf="this.IsShowErrorPhone" class="red">Số điện thoại không hợp lệ!</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="product-tabs">
+              <ul class="nav nav-tabs">
+                <li role="presentation" class="active">
+                  <a data-toggle="tab" href="#Detail">Chi tiết sản phẩm</a>
+                </li>
+                <li role="presentation" class="">
+                  <a data-toggle="tab" (click)="GetReportRating(ProductItem.id)" href="#ProductReviews">Đánh giá sản
+                    phẩm</a>
+                </li>
+              </ul>
+              <div class="tab-content">
+                <div class="tab-pane fade in active" id="Detail" [innerHTML]="ProductItem.content">
+
+                </div>
+                <div class="tab-pane fade in" id="ProductReviews">
+                  <ng-container *ngIf="isEmtyReportRating; then thenTemplate; else elseTemplate"></ng-container>
+                  <ng-template #thenTemplate>
+                    <div class="emptyReview">
+                      <img src="/assets/icon/empty.png">
+                      <div>Không tìm thấy đánh giá nào</div>
+                    </div>
+
+                  </ng-template>
+                  <ng-template #elseTemplate>
+                    <div class="row rating">
+
+                      <div class="col-md-3">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <span class="numberStar">{{ProductItem.star}}</span> trên 5
+                          </div>
+                          <div class="col-md-12 numberStar">
+                            <app-Star [numberStar]="ProductItem.star"></app-Star>
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="col-md-9 btncl">
+                        <div class="row">
+                          <div class="col-md-2">
+                            <button type="button" id="starAll" (click)="GetComment(0)" class="btn btn-light btnStar">Tất cả</button>
+                          </div>
+                          <div class="col-md-2" *ngFor="let item of lstReportRating; let i=index">
+                            <button type="button" (click)="GetComment(item.numberStar)" class="btn btn-light btnStar">{{item.numberStar}} sao
+                              ({{item.count}})</button>
+                          </div>
+
+                        </div>
+
+
+                      </div>
+                    </div>
+                    <div class="row comment" *ngFor="let item of lstCommentRating">
+                      <div class="container mt-5">
+                        <div class="d-flex justify-content-center row">
+                          <div class="col-md-8">
+                            <div class="d-flex flex-column comment-section">
+                              <div class="bg-white p-2">
+                                <div class="d-flex flex-row user-info">
+                                  <div class="d-flex flex-column justify-content-start ml-2">
+                                    <i class="fa fa-user cuser"></i>
+                                    <span class="d-block font-weight-bold name">{{item.createByName}}</span>
+                                    <br />
+                                    <span class="date text-black-50">Tạo ngày {{item.dateName}}</span>
+                                  </div>
+                                </div>
+                                <div class="mt-2">
+                                  <p class="comment-text" [innerHTML]="item.content"></p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </ng-template>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="latest-deals-product">
+            <h2 class="page-heading">
+              <span class="page-heading-title">
+                Sản phẩm tương tự
+              </span>
+            </h2>
+            <ul class="product-list">
+
+              <owl-carousel-o *ngIf="lstProduct.length>0" [options]="customOptions">
+
+                <ng-container *ngFor="let item of lstProduct">
+                  <ng-template carouselSlide [id]="item.id">
+                    <li [ngClass]="item.sale>0?'saleproduct':''">
+                      <app-productItem [item]="item" [typeItem]="'trang-chu'"></app-productItem>
+                    </li>
+                  </ng-template>
+                </ng-container>
+
+              </owl-carousel-o>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <!--Begin-->
+          <div class="box-sale-policy ng-scope" ng-controller="moduleController"
+            ng-init="initSalePolicyController(&#39;Shop&#39;)">
+            <h3><span>Chính sách bán hàng</span></h3>
+            <div class="sale-policy-block">
+              <ul>
+                <li>Giao hàng TOÀN QUỐC</li>
+                <li>Thanh toán khi nhận hàng</li>
+                <li>Đổi trả trong <span>15 ngày</span></li>
+                <li>Hoàn ngay tiền mặt</li>
+                <li>Chất lượng đảm bảo</li>
+                <li>Miễn phí vận chuyển:<span>Đơn hàng từ 3 món trở lên</span></li>
+              </ul>
+            </div>
+            <div class="buy-guide">
+              <h3>Hướng Dẫn Mua Hàng</h3>
+              <ul>
+                <li>
+                  Mua hàng trực tiếp tại website
+                  <b class="ng-binding"> http://www.hababo.vn</b>
+                </li>
+                <li>
+                  Gọi điện thoại <strong class="ng-binding">
+                    0908 77 00 95
+                  </strong> để mua hàng
+                </li>
+
+                <li>
+                  Mua sỉ/buôn xin gọi <strong class="ng-binding">
+                    0908 77 00 95
+                  </strong> để được
+                  hỗ trợ.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div id="left_column">
+            <div class="block left-module">
+              <p class="title_block">Sản phẩm Hot</p>
+              <div class="block_content">
+                <ul class="products-block best-sell">
+                  <li class="clearfix" *ngFor="let item of lstProductIsMostBuy">
+                    <app-productItem [item]="item" [typeItem]="'right-san-pham'"></app-productItem>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

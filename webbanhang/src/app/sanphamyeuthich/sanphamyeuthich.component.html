@@ -1,0 +1,54 @@
+
+<div class="main">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+
+      </div>
+      <div class="col-md-9">
+
+        <app-breadcrumb [lstBreadCrum]="lstBreadCrumb" [hiden]="false"></app-breadcrumb>
+
+        <div class="register-content clearfix ng-scope">
+          <div class="col-md-12 col-xs-12 col-sm-12 col-xs-offset-0 col-sm-offset-0">
+            <div class="row">
+              <div class="tab-content">
+               <div id="menu1" class="tab-pane fade active in">
+                <div class="myorder-content clearfix">
+                  <h1 class="page-heading"><span>Sản phẩm yêu thích của tôi</span></h1>
+                  <div class="myorder-block">
+                      <div class="table-responsive clearfix myorder-info">
+                          <table class="table table-mycart">
+                              <thead>
+                                  <tr>
+                                      <th>STT</th>
+                                      <th>Tên sản phẩm</th>
+                                      <th>Hình ảnh sản phẩm</th>
+                                      <th>Thao tác</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let item of lstWishList; let i=index">
+                                  <td>{{i+1}}</td>
+                                  <td><a title="{{item.name}}"
+                                    routerLink="/chi-tiet-san-pham"
+                                    [queryParams]="{p:item.code}">{{item.name}}</a></td>
+                                  <td class="center"><a title="{{item.name}}"
+                                    routerLink="/chi-tiet-san-pham"
+                                    [queryParams]="{p:item.code}"><img class="imgItem" src="{{this.urlHost}}/{{item.url}}" /></a></td>
+                                  <td><i (click)="RemoveItem(item.id)" class="fa fa-trash-o trashIcon"></i></td>
+                                </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+               </div>
+              </div>
+             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

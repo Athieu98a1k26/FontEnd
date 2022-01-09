@@ -1,0 +1,10 @@
+.imgItem{
+  width: 200px;
+}
+.center{
+  text-align:center;
+}
+.trashIcon{
+  font-size: 20px;
+  cursor: pointer;
+}

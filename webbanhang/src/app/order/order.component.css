@@ -1,0 +1,18 @@
+.trashSize{
+  font-size: 20px;
+}
+.mb20{
+  margin-bottom: 20px;
+}
+@media (min-width: 993px) {
+  .cart-content .cart-block-info table.product-list tbody .image img {
+    height: 80px;
+    width: 100px;
+  }
+}
+.customimg{
+  min-width: 50px;
+}
+.button-default,.comeback{
+  cursor: pointer;
+}

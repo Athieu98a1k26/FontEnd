@@ -1,0 +1,27 @@
+<div class="breadcrumb clearfix">
+  <ul>
+    <li class="home">
+      <a title="Đến trang chủ" routerLink="/trang-chu">
+        <span>Trang chủ</span></a>
+    </li>
+    <span *ngIf="this.nameDetail===''; then Strong else notStrong"></span>
+    <ng-template #notStrong>
+      <li *ngFor="let breadCrum of lstBreadCrum" class="icon-li">
+        <div class="link-site-more">
+          <a title="" routerLink="{{breadCrum.url}}" [queryParams]="breadCrum.param">
+            <span itemprop="title" [innerHTML]="breadCrum.name"></span>
+          </a>
+        </div>
+      </li>
+    </ng-template>
+    <ng-template #Strong>
+      <li *ngFor="let breadCrum of lstBreadCrum" class="icon-li">
+        <strong [innerHTML]="breadCrum.name"></strong>
+      </li>
+    </ng-template>
+
+    <li *ngIf="nameDetail===''?false:true" class="icon-li">
+      <strong>{{nameDetail}}</strong>
+    </li>
+  </ul>
+</div>

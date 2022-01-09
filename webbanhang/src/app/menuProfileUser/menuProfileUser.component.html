@@ -1,0 +1,19 @@
+<div class="menu-account">
+  <h3>
+      <span>
+          Quản lý cá nhân
+      </span>
+  </h3>
+  <ul>
+      <li [ngClass]="item.active?'active':''" *ngFor="let item of lstPageShow">
+        <a routerLink="{{item.link}}"><i ngClass="{{item.icon}}"></i> {{item.name}}</a>
+      </li>
+      <!-- <li><a routerLink="/don-hang"><i class="fa fa-list-alt"></i> Đơn hàng của tôi</a></li>
+      <li><a routerLink="/thong-tin-tai-khoan"><i class="fa fa-shopping-cart"></i> Sản phẩm yêu thích</a></li>
+      <li><a routerLink="/thay-doi-mat-khau"><i class="fa fa-key"></i> Thay đổi mật khẩu</a></li>
+      <li><a routerLink="/dang-nhap"><i class="fa fa-sign-in"></i> Đăng nhập</a></li>
+      <li><a routerLink="/dang-ky"><i class="fa fa-key"></i> Đăng ký</a></li>
+      <li><a routerLink="/quen-mat-khau"><i class="fa fa-key"></i> Quên mật khẩu</a></li>
+      <li><a href="javascript:void(0)" ><i class="fa fa-sign-out"></i> Đăng xuất</a></li> -->
+  </ul>
+</div>

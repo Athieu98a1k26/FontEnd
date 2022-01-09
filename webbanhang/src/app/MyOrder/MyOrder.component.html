@@ -1,0 +1,177 @@
+
+<div class="main">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <app-menuProfileUser [lstIdShow]="[1,2,3,4]" [pageActive]="2"></app-menuProfileUser>
+      </div>
+      <div class="col-md-9">
+
+        <app-breadcrumb [lstBreadCrum]="lstBreadCrumb" [hiden]="false"></app-breadcrumb>
+
+        <div class="register-content clearfix ng-scope">
+          <h1 class="page-heading"><span>Thông tin đơn hàng</span></h1>
+          <!-- ngIf: IsError -->
+          <!-- ngIf: IsSuccess -->
+          <!-- ngIf: InValid -->
+          <div class="col-md-12 col-xs-12 col-sm-12 col-xs-offset-0 col-sm-offset-0">
+            <div class="row">
+              <div class="process">
+               <div class="process-row nav nav-tabs">
+                <div class="process-step">
+                 <button type="button" class="btn btn-default btn-circle" [ngClass]="this.ItemRequest.status==1?'bgStatus':''" (click)="ChangeStatus(1)" href="#menu1"><i class="fa fa-spinner s30" aria-hidden="true"></i></button>
+                 <p>Chờ xác nhận</p>
+                </div>
+                <div class="process-step">
+                 <button type="button" class="btn btn-default btn-circle" [ngClass]="this.ItemRequest.status==2?'bgStatus':''" (click)="ChangeStatus(2)" href="#menu1"><i class="fa fa-pencil-square-o s30" aria-hidden="true"></i></button>
+                 <p>Đã xác nhận</p>
+                </div>
+                <div class="process-step">
+                 <button type="button" class="btn btn-default btn-circle" [ngClass]="this.ItemRequest.status==3?'bgStatus':''" (click)="ChangeStatus(3)" href="#menu1"><i class="fa fa-car s30" aria-hidden="true"></i></button>
+                 <p>Đang giao hàng</p>
+                </div>
+                <div class="process-step">
+                 <button type="button" class="btn btn-default btn-circle" [ngClass]="this.ItemRequest.status==4?'bgStatus':''" (click)="ChangeStatus(4)" href="#menu1"><i class="fa fa-check-circle s30" aria-hidden="true"></i></button>
+                 <p>Đã giao hàng</p>
+                </div>
+                <div class="process-step">
+                 <button type="button" class="btn btn-default btn-circle" [ngClass]="this.ItemRequest.status==5?'bgStatus':''" (click)="ChangeStatus(5)" href="#menu1"><i class="fa fa-trash s30" aria-hidden="true"></i></button>
+                 <p>Đơn hàng hủy</p>
+                </div>
+               </div>
+              </div>
+              <div class="tab-content">
+               <div id="menu1" class="tab-pane fade active in">
+                <div class="myorder-content clearfix">
+                  <h1 class="page-heading"><span>Đơn hàng của tôi</span></h1>
+                  <div class="myorder-block">
+                      <div class="table-responsive clearfix myorder-info">
+                          <table class="table table-mycart">
+                              <thead>
+                                  <tr>
+                                      <th>STT</th>
+                                      <th>Mã đơn hàng</th>
+                                      <th>Tổng tiền</th>
+                                      <th>Hình thức thanh toán</th>
+                                      <th>Trạng thái thanh toán</th>
+                                      <th>Thao tác</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let item of lstData ;index as i">
+                                  <td>{{i+1}}</td>
+                                  <td>{{item.transId}}</td>
+                                  <td class="center">{{item.totalPrice?.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}}</td>
+                                  <td class="center">{{item.typeName}}</td>
+                                  <td class="center"><span [ngClass]="clClass">{{item.statusName}}</span></td>
+                                  <td class="viewicon" >
+                                    <i title="Xem chi tiết" (click)="ShowDetail(item.id)" class="fa fa-eye"></i>
+                                    &nbsp;
+                                    <i *ngIf="item.status<=2" (click)="CancelPayment(item.id)" title="Hủy đơn hàng" class="fa fa-trash-o"></i>
+                                    &nbsp;
+                                    <i *ngIf="item.status==4" (click)="ShowReview(item.lstProduct)" title="Đánh giá sản phẩm" class="fa fa-star clr"></i>
+                                  </td>
+                                </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+               </div>
+              </div>
+             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary hiden" id="btnShowPaymentDetail" data-toggle="modal" data-target="#ModalShowPaymentInfo">
+
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="ModalShowPaymentInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="payment-content">
+          <app-InfoCheckout  [lstItemShow]="lstItemShow" [isHidentButton]="true"></app-InfoCheckout>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary hiden" id="btnRatingReview" data-toggle="modal" data-target="#ModalbtnRatingReview">
+
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="ModalbtnRatingReview" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form [formGroup]="form" method="post" (submit)="Save()">
+          <div class="row">
+            <div class="col-md-12">
+              <table class="table ">
+                <thead>
+                  <tr>
+                    <th scope="col">STT</th>
+                    <th scope="col">Tên sản phẩm</th>
+                    <th scope="col">
+                      <!-- <label class="containe">
+                      <input type="checkbox" (change)="ToggerCheckAll($event)" [checked]="false">
+                      <span class="checkmark"></span>
+                    </label> -->
+                  </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of this.ItemStar.lstProduct; let i=index">
+                    <th scope="row">{{i+1}}</th>
+                    <td scope="row">{{item.name}}</td>
+                    <td scope="row">
+                      <label class="containe">
+                        <input type="checkbox" (change)="setCheckItem($event,item.id)" [checked]="item.isCheck">
+                        <span class="checkmark"></span>
+                      </label>
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+            <div class="col-md-12 lstStar">
+                <i [ngClass]="ItemStar.star>=1?'c-star':''" class="fa fa-star" (mouseenter)="ChangeStar(1)"></i>
+                <i [ngClass]="ItemStar.star>=2?'c-star':''" class="fa fa-star" (mouseenter)="ChangeStar(2)"></i>
+                <i [ngClass]="ItemStar.star>=3?'c-star':''" class="fa fa-star" (mouseenter)="ChangeStar(3)"></i>
+                <i [ngClass]="ItemStar.star>=4?'c-star':''" class="fa fa-star" (mouseenter)="ChangeStar(4)"></i>
+                <i [ngClass]="ItemStar.star>=5?'c-star':''" class="fa fa-star" (mouseenter)="ChangeStar(5)"></i>
+                <span class="numberRating">{{this.ItemStar.star}} Sao</span>
+            </div>
+            <div class="col-md-12">
+              <angular-editor id="content" formControlName="content" [(ngModel)]="this.ItemStar.content" [config]="editorConfig"></angular-editor>
+            </div>
+            <div class="col-md-12 btnUpdateRating">
+              <button type="submit" [disabled]="(isDisableBtnReview || !form.valid)" class="btn btn-success">Đánh giá sản phẩm</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="ModalbtnRatingReviewClose" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+      </div>
+    </div>
+  </div>
+</div>

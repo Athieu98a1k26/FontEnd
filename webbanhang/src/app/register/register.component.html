@@ -1,0 +1,170 @@
+<div class="main">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <app-menuProfileUser [lstIdShow]="[5,6,7]" [pageActive]="6"></app-menuProfileUser>
+      </div>
+      <div class="col-md-9">
+
+        <app-breadcrumb [lstBreadCrum]="lstBreadCrumb" [hiden]="false"></app-breadcrumb>
+
+        <div class="register-content clearfix ng-scope">
+          <h1 class="page-heading"><span>Đăng ký tài khoản</span></h1>
+          <!-- ngIf: IsError -->
+          <!-- ngIf: IsSuccess -->
+          <!-- ngIf: InValid -->
+          <div class="col-md-10 col-md-offset-2 col-xs-12 col-sm-12 col-xs-offset-0 col-sm-offset-0">
+            <form class="form-horizontal" [formGroup]="form" method="post" (submit)="Save()">
+              <h2><span>Thông tin tài khoản</span></h2>
+              <div class="form-group">
+                <label for="email" class="col-sm-3">Email<span class="warning">(*)</span></label>
+                <div class="col-sm-9">
+                  <input type="email" class="form-control" id="email" formControlName="email" [(ngModel)]="Item.email"
+                    placeholder="Địa chỉ email">
+                  <div class="warning"
+                    *ngIf="this.form.controls.email.errors?.required && (this.form.controls.email.dirty||this.form.touched)">
+                    Vui lòng nhập địa chỉ email!</div>
+                  <div class="warning"
+                    *ngIf="this.form.controls.email.errors?.email && (this.form.controls.email.dirty||this.form.touched)">
+                    Email không hợp lệ!</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="passWord" class="col-sm-3">Mật khẩu<span class="warning">(*)</span></label>
+                <div class="col-sm-9">
+                  <input type="password" class="form-control" id="passWord" formControlName="passWord"
+                    [(ngModel)]="Item.passWord" placeholder="Mật khẩu">
+                  <div class="warning"
+                    *ngIf="this.form.controls.passWord.errors?.required && (this.form.controls.passWord.dirty||this.form.touched)">
+                    Vui lòng nhập mật khẩu!</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="repassWord" class="col-sm-3">Nhập lại mật khẩu<span class="warning">(*)</span></label>
+                <div class="col-sm-9">
+                  <input type="password" class="form-control" autocomplete="false" id="repassWord" formControlName="repassWord"
+                    [(ngModel)]="Item.repassWord" placeholder="Nhập lại mật khẩu">
+                  <div class="warning"
+                    *ngIf="this.form.controls.repassWord.errors?.required  && (this.form.controls.repassWord.dirty||this.form.touched)">
+                    Vui lòng nhập lại mật khẩu!</div>
+                  <div class="warning"
+                    *ngIf="this.form.hasError('notSame') && (Item.repassWord!='')  && (this.form.controls.repassWord.dirty||this.form.touched)">
+                    Mật khẩu không trùng nhau!</div>
+                </div>
+              </div>
+              <h2>Thông tin cá nhân</h2>
+              <div class="form-group">
+                <label for="userName" class="col-sm-3">Họ tên<span class="warning">(*)</span></label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="userName" formControlName="userName"
+                    [(ngModel)]="Item.userName" placeholder="Họ &amp; Tên">
+                  <div class="warning"
+                    *ngIf="this.form.controls.userName.errors?.required && (this.form.controls.userName.dirty||this.form.touched)">
+                    Vui lòng nhập họ tên!</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3">Giới tính</label>
+                <div class="col-sm-9">
+                  <ng-select class="form-select" formControlName="sex" [items]="lstSex" bindLabel="name" bindValue="id"
+                    notFoundText="Không tìm thấy kết quả" [(ngModel)]="Item.sex">
+                  </ng-select>
+                  <div class="warning"
+                    *ngIf="this.form.controls.sex.errors?.required && (this.form.controls.sex.dirty||this.form.touched)">
+                    Vui lòng chọn giới tính!</div>
+                </div>
+              </div>
+              <div class="form-group form-inline">
+                <label class="col-sm-3">Ngày sinh</label>
+                <div class="col-sm-9">
+                  <ng-select class="form-select col-md-4" formControlName="day" [items]="this.lstDay" bindLabel="name"
+                    bindValue="id" notFoundText="Không tìm thấy kết quả" [(ngModel)]="ItemBirth.day">
+                  </ng-select>
+                  <ng-select class="form-select col-md-4" formControlName="month" [items]="this.lstMonth"
+                    bindLabel="name" bindValue="id" notFoundText="Không tìm thấy kết quả" [(ngModel)]="ItemBirth.month">
+                  </ng-select>
+
+                  <ng-select class="form-select col-md-4" formControlName="year" [items]="this.lstYear" bindLabel="name"
+                    bindValue="id" notFoundText="Không tìm thấy kết quả" [(ngModel)]="ItemBirth.year">
+                  </ng-select>
+
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="phoneNumber" class="col-sm-3">Điện thoại</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="phoneNumber" formControlName="phoneNumber" [(ngModel)]="Item.phoneNumber" placeholder="Số điện thoại">
+                    <div class="warning" *ngIf="this.form.controls.phoneNumber.errors?.required && (this.form.controls.phoneNumber.dirty||this.form.touched)">Vui lòng nhập số điện thoại!</div>
+                    <div class="warning" *ngIf="this.form.controls.phoneNumber.errors?.PhoneError && (this.form.controls.phoneNumber.dirty||this.form.touched)">Số điện thoại không hợp lệ!</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-3" for="provinceId">Tên thành phố/ Tỉnh</label>
+                <div class="col-sm-9">
+                  <ng-select class="form-select" formControlName="provinceId" [items]="lstProvinceId" bindLabel="name"
+                    bindValue="id" (change)="getDistrictByProvince($event)" [(ngModel)]="Item.provinceId">
+                  </ng-select>
+                  <div class="warning"
+                    *ngIf="this.form.controls.provinceId.errors?.required && (this.form.controls.provinceId.dirty||this.form.touched)">
+                    Vui lòng chọn tên thành phố/tỉnh!</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3" for="districtId">Quận/Huyện</label>
+                <div class="col-sm-9">
+                  <ng-select class="form-select" formControlName="districtId" [items]="lstDistrictId" bindLabel="name"
+                    bindValue="id" notFoundText="Không tìm thấy kết quả" [(ngModel)]="Item.districtId">
+                  </ng-select>
+                  <div class="warning"
+                    *ngIf="this.form.controls.districtId.errors?.required && (this.form.controls.districtId.dirty||this.form.touched)">
+                    Vui lòng chọn tên quận/huyện!</div>
+                </div>
+
+
+              </div>
+              <div class="form-group">
+                <label for="address" class="col-sm-3">Địa chỉ</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="address" formControlName="address"
+                    [(ngModel)]="Item.address" placeholder="Địa chỉ chi tiết">
+                  <div class="warning"
+                    *ngIf="this.form.controls.address.errors?.required && (this.form.controls.address.dirty||this.form.touched)">
+                    Vui lòng nhập địa chỉ chi tiết!</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="captcha" class="col-sm-3">Nhập mã Captcha<span class="warning">(*)</span></label>
+                <div class="col-md-9">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <input type="text" class="form-control" id="captcha" formControlName="captcha"
+                        [(ngModel)]="Item.captcha.code" placeholder="Mã captcha">
+                      <div class="warning"
+                        *ngIf="this.form.controls.captcha.errors?.required && (this.form.controls.captcha.dirty||this.form.touched)">
+                        Vui lòng nhập mã captcha!</div>
+                    </div>
+                    <div class="col-md-6 flex">
+                      <img class="img-captcha" id="imgCaptcha" alt="captcha" [src]="strCaptCha">
+                    <a class="refresh-captcha" id="btnRefreshCapcha" (click)="RefreshCaptCha()">
+                      <i class="fa fa-refresh"></i>
+                    </a>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-8">
+                  <button [disabled]="!this.form.valid" type="submit" class="btn btn-primary">Đăng ký</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

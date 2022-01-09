@@ -1,0 +1,189 @@
+<section class="top-link clearfix">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <ul class="nav navbar-nav topmenu-contact pull-left">
+          <li><i class="fa fa-phone"></i> <span>Hotline:0908 77 00 95</span></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right topmenu  hidden-xs hidden-sm">
+          <li class="order-check"><a routerLink="/kiem-tra-don-hang"><i class="fa fa-pencil-square-o"></i> Kiểm tra đơn
+              hàng</a></li>
+          <li class="order-cart"><a routerLink="/gio-hang"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
+          <li class="order-cart"><a routerLink="/san-pham-yeu-thich"><i class="fa fa-heart-o"></i> Sản phẩm yêu thich</a></li>
+          <li *ngIf="infoUser['email']===''?true:false" class="account-login"><a routerLink="/dang-nhap"><i
+                class="fa fa-sign-in"></i> Đăng nhập </a></li>
+          <li *ngIf="infoUser['email']===''?true:false" class="account-register"><a routerLink="/dang-ky"><i
+                class="fa fa-key"></i> Đăng ký </a></li>
+          <li *ngIf="infoUser['email']===''?false:true" class="account-info">
+            <a routerLink="/thong-tin-tai-khoan">{{infoUser['email']}}</a>
+            <a class="account-logout" id="btnLogOff" (click)="LogOut()" href="javascript:void(0)" title="">[Thoát] </a>
+          </li>
+        </ul>
+        <div class="show-mobile hidden-lg hidden-md">
+          <div class="quick-user">
+            <div class="quickaccess-toggle">
+              <i class="fa fa-user"></i>
+            </div>
+            <div class="inner-toggle">
+              <ng-container *ngIf="infoUser['email']===''; then thenTemplate; else elseTemplate"></ng-container>
+              <ng-template #thenTemplate>
+                <ul class="login links">
+                  <li>
+                    <a routerLink="/dang-ky"><i class="fa fa-sign-in"></i> Đăng ký</a>
+                  </li>
+                  <li>
+                    <a routerLink="/dang-nhap"><i class="fa fa-key"></i> Đăng nhập</a>
+                  </li>
+                </ul>
+              </ng-template>
+              <ng-template #elseTemplate>
+                <ul class="login links">
+                  <li>
+                    <a routerLink="/thong-tin-tai-khoan">{{infoUser['email']}}</a>
+                  </li>
+                  <li>
+                    <a class="account-logout" id="btnLogOff" (click)="LogOut()" href="javascript:void(0)" title="">[Thoát] </a>
+                  </li>
+                </ul>
+              </ng-template>
+
+
+            </div>
+          </div>
+          <div class="quick-access">
+            <div class="quickaccess-toggle">
+              <i class="fa fa-list"></i>
+            </div>
+            <div class="inner-toggle">
+              <ul class="links">
+                <li><a id="mobile-wishlist-total" routerLink="/kiem-tra-don-hang" class="wishlist"><i
+                      class="fa fa-pencil-square-o"></i> Kiểm tra đơn hàng</a></li>
+                <li><a routerLink="/gio-hang" class="shoppingcart"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
+                <li><a routerLink="/san-pham-yeu-thich" class="shoppingcart"><i class="fa fa-heart-o"></i> Sản phẩm yêu thich</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN HEADER -->
+<div class="container main-header">
+  <div class="row">
+    <div class="col-xs-12 col-sm-3 logo">
+      <a routerLink="/" class="logo" title="Hababo">
+        <img src="/assets/Logo/logo.jpg" alt="Hababo" title="Hababo">
+      </a>
+      <h1 style="display: none;">
+        Hababo
+      </h1>
+    </div>
+    <div class="col-xs-7 col-sm-7 header-search-box">
+      <div class="search-box">
+        <form class="search form-inline ng-pristine ng-valid">
+          <div class="form-group input-serach">
+            <input type="text" name="search" (keyup)="getKeySearch($event)" class="search_box" id="txtsearch" placeholder="Nhập từ khóa tìm kiếm...">
+          </div>
+          <button (click)="Search()" id="btnsearch" class="pull-right btn-search">
+            <span class="hidden-400">Tìm kiếm</span>
+            <span class="show-400"><i class="fa fa-search" aria-hidden="true"></i></span>
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="col-xs-5 col-sm-2 group-button-header new-login">
+      <a *ngIf="infoUser['email']===''" title="Đăng nhập" routerLink="/dang-nhap" class="btn-heart"></a>
+      <div class="btn-cart" id="cart-block">
+        <a title="Giỏ hàng" routerLink="/gio-hang">Giỏ hàng</a>
+        <span class="text-show">Giỏ hàng</span>
+        <span class="notify notify-right">{{countItemCart}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END MANIN HEADER -->
+
+<div id="nav-top-menu" class="nav-top-menu">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-3" id="box-vertical-megamenus">
+        <div class="box-vertical-megamenus menu-quick-select">
+          <h4 class="title click-menu">
+            <span class="title-menu">Danh mục sản phẩm</span>
+
+            <span class="btn-open-mobile pull-right home-page"> <i class="fa fa-bars"></i></span>
+          </h4>
+          <div id="vertical-menu-contentId" class="vertical-menu-content is-home">
+            <ul class="vertical-menu-list">
+              <li class="has-child level0" *ngFor="let category of this.lstCategory;">
+                <a [ngClass]="{'parent': category.childCategory.length>0}" class="dropdown-toggle has-category"
+                  routerLink="/{{urlMidder}}" [queryParams]="{c:category.code}">
+                  <span [innerHtml]="category.name"></span>
+                </a>
+
+                <ul *ngIf="category.childCategory.length>0" class="level1 drop-menu">
+                  <li class="level1 menuchild" *ngFor="let categorychild of category.childCategory;">
+                    <a class="" routerLink="/{{urlMidder}}" [queryParams]="{c:categorychild.code}">
+                      <span [innerHtml]="categorychild.name"></span>
+
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="main-menu-new" class="col-sm-12 col-md-9 main-menu">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#new-menu"
+                aria-expanded="false" aria-controls="navbar">
+                <i class="fa fa-bars"></i>
+              </button>
+              <a class="navbar-brand" routerLink="#">MENU</a>
+            </div>
+            <div id="new-menu" class="navbar-collapse collapse">
+              <ul class="menu t-menu nav">
+                <li *ngFor="let menu of this.lstMenuManager;" class="level0">
+                  <a class="" routerLink="/{{menu.url}}">
+                    <span [innerHTML]="menu.name"></span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <!--/.nav-collapse -->
+          </div>
+        </nav>
+      </div>
+    </div>
+    <!-- userinfo on top-->
+    <div id="form-search-opntop">
+      <form class="search form-inline ng-pristine ng-valid">
+        <div class="form-group input-serach">
+          <input type="text" name="search" (keyup)="getKeySearch($event)" class="search_box" id="txtsearch" placeholder="Nhập từ khóa tìm kiếm...">
+        </div>
+        <button (click)="Search()" id="btnsearch" class="pull-right btn-search">
+            <span class="hidden-400">Tìm kiếm</span>
+            <span class="show-400"><i class="fa fa-search" aria-hidden="true"></i></span>
+        </button>
+    </form>
+    </div>
+    <!-- userinfo on top-->
+
+    <!-- CART ICON ON MMENU -->
+    <div id="shopping-cart-box-ontop">
+      <a routerLink="/gio-hang">
+        <span class="icon-cart-ontop"></span>
+        <span class="cart-items-count">{{countItemCart}}</span>
+        <span class="text textcart">Giỏ hàng</span>
+        <div class="shopping-cart-box-ontop-content">
+        </div>
+      </a>
+
+    </div>
+  </div>
+</div>
