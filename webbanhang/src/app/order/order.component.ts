@@ -103,8 +103,9 @@ export class OrderComponent implements OnInit {
       itemCart.count = item.count;
       cartEntity.push(itemCart)
     }
-
-    //gọi xuống server xem còn hàng không, nếu không thì kệ
+    if(cartEntity.length>0)
+    {
+      //gọi xuống server xem còn hàng không, nếu không thì kệ
     this.productService.CheckQuantity({ DataJson: JSON.stringify(cartEntity) }).then((rs: any) => {
       if (rs.status == 0) {
         //sản phẩm vẫn còn hàng
@@ -121,20 +122,26 @@ export class OrderComponent implements OnInit {
         });
       }
     })
+    }
+
   }
 
   CheckIsCheckOut() {
     let ItemCart = BaseLocalStorage.GetItemCart();
-    this.productService.CheckQuantity({ DataJson: ItemCart }).then((rs: any) => {
-      if (rs.status == 0) {
-        //sản phẩm vẫn còn hàng
-        this.isCheckout = true;
+    if(ItemCart!=null)
+    {
+      this.productService.CheckQuantity({ DataJson: ItemCart }).then((rs: any) => {
+        if (rs.status == 0) {
+          //sản phẩm vẫn còn hàng
+          this.isCheckout = true;
 
-      }
-      else {
-        this.isCheckout = false;
-      }
-    });
+        }
+        else {
+          this.isCheckout = false;
+        }
+      });
+    }
+
   }
 
 

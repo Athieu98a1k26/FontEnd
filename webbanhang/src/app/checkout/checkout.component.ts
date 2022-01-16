@@ -34,22 +34,26 @@ export class CheckoutComponent implements OnInit {
 
   CheckIsCheckOut() {
     let ItemCart = BaseLocalStorage.GetItemCart();
-    this.productService.CheckQuantity({ DataJson: ItemCart }).then((rs: any) => {
-      if (rs.status == 0) {
-        //sản phẩm vẫn còn hàng
+    if(ItemCart!=null)
+    {
+      this.productService.CheckQuantity({ DataJson: ItemCart }).then((rs: any) => {
+        if (rs.status == 0) {
+          //sản phẩm vẫn còn hàng
 
 
-      }
-      else {
-        this.isHidenButton=true;
-        Swal.fire({
-          icon: 'error',
-          title: "Đã có ít nhất một sản phẩm đã hết hàng, vui lòng kiểm tra lại trong giỏ hàng nhé",
-          showConfirmButton: false,
-          timer: 5000
-        });
-      }
-    });
+        }
+        else {
+          this.isHidenButton=true;
+          Swal.fire({
+            icon: 'error',
+            title: "Đã có ít nhất một sản phẩm đã hết hàng, vui lòng kiểm tra lại trong giỏ hàng nhé",
+            showConfirmButton: false,
+            timer: 5000
+          });
+        }
+      });
+    }
+
   }
 
   GetUserByClaim(){
