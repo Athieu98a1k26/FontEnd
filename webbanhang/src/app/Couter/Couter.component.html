@@ -4,9 +4,19 @@
     <input (keyup)="SetCountItem($event)" type="text" id="countItem" value="{{countItem}}">
     <span (click)="ADD()" class="plus-btn">+</span>
   </div>
-  <div  class="quantity">
-    {{quantity}} sản phẩm có sẵn
-  </div>
+  <ng-container *ngIf="quantity>0; then thenTemplate; else elseTemplate"></ng-container>
+  <ng-template #thenTemplate>
+    <div class="quantity">
+      {{quantity}} sản phẩm có sẵn
+    </div>
+  </ng-template>
+  <ng-template #elseTemplate>
+    <div class="quantity red">
+      Sản phẩm đã hết hàng, vui lòng quay lại sau!
+    </div>
+  </ng-template>
+
+
 
 </div>
 

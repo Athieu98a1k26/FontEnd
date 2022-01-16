@@ -39,6 +39,15 @@ export class CompleteComponent implements OnInit {
     this.moMoService.MomoSuccess(strquery).then((rs:any)=>{
       this.Item=rs;
       if(rs.status==0){
+        //thấy thông tin của đơn hàng
+        let paymentId=rs.data;
+        if(paymentId!=undefined){
+           this.paymentService.GetPaymentById(paymentId).then((rs:any)=>{
+            if(rs.status==0){
+              this.lstItemShow=rs.data;
+            }
+          });
+        }
         Swal.fire({
           icon: 'success',
           title: this.Item.message,
@@ -72,7 +81,7 @@ export class CompleteComponent implements OnInit {
           //thấy thông tin của đơn hàng
           let paymentId=this.routeActivated.snapshot.queryParams['paymentId'];
           if(paymentId!=undefined){
-             await this.paymentService.GetPaymentById(paymentId).then((rs:any)=>{
+             this.paymentService.GetPaymentById(paymentId).then((rs:any)=>{
               if(rs.status==0){
                 this.lstItemShow=rs.data;
               }

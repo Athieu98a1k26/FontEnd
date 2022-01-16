@@ -25,6 +25,9 @@ export class PaymentService extends BaseService {
   GetPaymentById(paymentId:string){
     return this.http.get(this.apiUrl + 'GetPaymentById?paymentId='+paymentId).toPromise();
   }
+  GetPaymentBytranId(TransId:string){
+    return this.http.get(this.apiUrl + 'GetPaymentBytranId?TransId='+TransId).toPromise();
+  }
   GetPaymentSimpleInfo(data:any){
     return this.HttpPost(this.apiUrl + 'GetPaymentSimpleInfo',data);
   }

@@ -19,7 +19,16 @@ export class ProductItemComponent implements OnInit {
 
   ngOnInit() {
   }
-  AddItemCart(id:string,name:string){
+  AddItemCart(id:string,name:string,quantity:number){
+    if(quantity<=0){
+      Swal.fire({
+        icon: 'error',
+        title: 'Sản phẩm đã hết hàng, vui lòng quay lại sau nhé!',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      return;
+    }
     let cartEntity=new CartEnity();
       cartEntity.id=id;
       cartEntity.name=name;

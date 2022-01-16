@@ -24,4 +24,7 @@ private apiUrl=BaseCongif.UrlBase+"/Product/";
   GetListProductAll(data:any): Promise<any>{
     return this.http.post(this.apiUrl+'GetListProductAll',data).toPromise();
   }
+  CheckQuantity(data:any){
+    return this.http.post(this.apiUrl+'CheckQuantity',data).toPromise();
+  }
 }

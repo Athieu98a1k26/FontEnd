@@ -27,6 +27,7 @@ export class DetailComponent implements OnInit {
   imgProductCurrent: string = '';
   urlHost: string = BaseCongif.UrlBaseHost;
   zoomMode: string = 'hover';
+  //số lượng mua
   countItem: number = 1;
   //lưu trữ số lượng sao và giá trị
   lstReportRating:any;
@@ -80,7 +81,6 @@ export class DetailComponent implements OnInit {
   GetListProductIsMostBuy(){
     this.productService.GetListProductIsMostBuy(this.ItemRequest).then((rs:any)=>{
       if(rs.status==0){
-        console.log(rs);
         this.lstProductIsMostBuy=rs.data;
       }
 
@@ -148,12 +148,13 @@ export class DetailComponent implements OnInit {
     }
 
   }
+  //khi mua ngay
   BuyProduct(){
     let cartEntity=new Array<CartEnity>();
     let itemCart=new CartEnity();
     itemCart.id=this.ProductItem.id;
     itemCart.name=this.ProductItem.name;
-    itemCart.count=1;
+    itemCart.count=this.countItem;
     cartEntity.push(itemCart)
     BaseLocalStorage.SetListOverideItemCart(cartEntity);
 

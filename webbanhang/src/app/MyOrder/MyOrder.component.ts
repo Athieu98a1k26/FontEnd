@@ -54,7 +54,6 @@ export class MyOrderComponent implements OnInit {
     itemBreadCrumb.url = '/don-hang';
     this.lstBreadCrumb.push(itemBreadCrumb);
   }
-
   getlstPayment() {
     this.setClass();
     this.lstData = null;

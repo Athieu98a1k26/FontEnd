@@ -21,10 +21,96 @@
                               <button (click)="Search()" class="btn btn-primary">Xem ngay</button>
                           </div>
                       </form>
+                      <table class="table table-mycart">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Mã đơn hàng</th>
+                                <th>Số điện thoại</th>
+                                <th>Tổng tiền</th>
+                                <th>Hình thức thanh toán</th>
+                                <th>Trạng thái thanh toán</th>
+                                <th>Chi tiết</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngIf="data">
+                            <td>1</td>
+                            <td [innerHTML]="data.transId"></td>
+                            <td [innerHTML]="data.customer"></td>
+                            <td [innerHTML]="data.totalPrice?.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})"></td>
+                            <td [innerHTML]="data.typeName"></td>
+                            <td [innerHTML]="data.statusName"></td>
+                            <td><i data-toggle="modal" data-target="#ModalShowPaymentInfo" id="openmodalInfoPayment" class="fa fa-eye eyeCustom" style="font-size:18px"></i></td>
+                          </tr>
+                        </tbody>
+                    </table>
                       <!-- ngIf: Id>0 -->
                   </div>
               </div>
           </div>
       </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="ModalShowPaymentInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div *ngIf="data" class="cart-block-info">
+          <div class="cart-info table-responsive">
+            <table class="table product-list">
+              <thead>
+                <tr>
+                  <th>Hình ảnh sản phẩm</th>
+                  <th>Tên sản phẩm</th>
+                  <th>Giá</th>
+                  <th>Số lượng</th>
+                  <th>Thành tiền</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- ngRepeat: item in OrderDetails -->
+                <tr *ngFor="let item of data.listProductOrder">
+                  <td class="image">
+                    <a routerLink="/chi-tiet-san-pham" (click)="removeModal()" [queryParams]="{p:item.code}"> <img class="img-responsive customimg"
+                        src="{{this.urlHost}}/{{item.urlImage}}"></a>
+                  </td>
+                  <td class="des">
+                    <a routerLink="/chi-tiet-san-pham" (click)="removeModal()" [queryParams]="{p:item.code}"
+                      class="ng-binding">{{item.name}}</a>
+                    <span class="ng-binding"></span>
+                  </td>
+                  <td class="price ng-binding">
+                    {{item.price?.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}}
+                  </td>
+                  <td class="quantity">
+                    {{item.count}}
+                  </td>
+                  <td class="amount ng-binding">
+                    {{item.totalPrice?.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}}
+
+                  </td>
+
+                </tr><!-- end ngRepeat: item in OrderDetails -->
+              </tbody>
+            </table>
+          </div>
+          <div class="clearfix text-right mb20">
+            <span><b>Tổng thanh toán:</b></span>
+            <span class="pay-price ng-binding">
+              {{data.totalPrice?.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}}
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+      </div>
+    </div>
   </div>
 </div>

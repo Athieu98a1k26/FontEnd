@@ -66,6 +66,7 @@ export class ProductComponent implements OnInit {
       //lấy hết tất cả các sản phẩm
     }
     if(this.ItemRequest.code=='' && this.ItemRequest.keyword==''){
+      this.CreateBreadCrumb();
       this.GetListProductAll();
     }
     else{

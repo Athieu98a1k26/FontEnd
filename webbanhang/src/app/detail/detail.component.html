@@ -60,10 +60,10 @@
 
                   </div>
                   <div class="action-cart">
-                    <a href="javascript:void(0)" (click)="AddToCart()" class="btn btn-default"><i
+                    <a href="javascript:void(0)" (click)="ProductItem.quantity>0 && AddToCart()" class="btn btn-default"><i
                         class="fa fa-shopping-cart"></i> Thêm giỏ hàng</a>
                     &nbsp; &nbsp;
-                    <a href="javascript:void(0)" (click)="BuyProduct()" class="btn btn-primary"><i
+                    <a href="javascript:void(0)" (click)="ProductItem.quantity>0 && BuyProduct()" class="btn btn-primary"><i
                         class="fa fa-check"></i> Mua ngay</a>
                   </div>
 

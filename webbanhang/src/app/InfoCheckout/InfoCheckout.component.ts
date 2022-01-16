@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -45,6 +45,8 @@ export class InfoCheckoutComponent implements OnInit {
   @Input() lstItemShow:any;
   @Input() isHidentButton:boolean=false;
   @Input() isHidenLR:boolean=true;
+  @Input() isDisable:boolean=false;
+  @Input() idModal:string='';
   constructor(private formBuilder: FormBuilder,private provinceService:ProvinceService,
      private spinner: NgxSpinnerService,
      private productService: ProductService, private paymentService:PaymentService,private router:Router) { }
@@ -97,7 +99,9 @@ export class InfoCheckoutComponent implements OnInit {
     }
 
   }
-
+  eventClickRouterLink(){
+    document.getElementById(this.idModal)?.click();
+  }
   ngOnChanges(): void {
     this.GetObjectDetail();
   }

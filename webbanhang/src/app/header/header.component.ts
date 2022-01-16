@@ -9,6 +9,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 import { UserService } from 'src/services/User.service';
 import { BaseLocalStorage } from 'src/BaseLocalStorage';
 import { AuthService } from 'src/services/Auth.service';
+import { ConfigService } from 'src/services/Config.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -22,9 +23,12 @@ export class HeaderComponent implements OnInit {
   lstBanner:any;
   lstMenuManager:any;
   urlHost:string=BaseCongif.UrlBaseHost;
+  email:string='';
+  phone:string='';
   infoUser:any={
     email:'',
   };
+  lstKey: Array<string>=['EMAIL','PHONE'];
   urlMidder:string="san-pham";
   keyWordSearch:string='';
   ItemBannerRequest:any={
@@ -43,7 +47,7 @@ export class HeaderComponent implements OnInit {
   currentUser:Subscription=Subscription.EMPTY;
   constructor(private headerService:HeaderService,
     private bannerService:BannerService,private menuManagerService:MenuManagerService,private router: Router
-    ,private userService:UserService,private authService:AuthService) { }
+    ,private userService:UserService,private authService:AuthService,private configService:ConfigService) { }
 
   ngOnInit() {
 
@@ -151,7 +155,21 @@ export class HeaderComponent implements OnInit {
     this.GetListCategoryTree();
     this.GetListBanner();
     this.getListMenuManager();
+    this.GetListConfigByListKey();
   }
+
+  GetListConfigByListKey(){
+    this.configService.GetListConfigByListKey(this.lstKey).then((rs:any)=>{
+      if(rs.status==0){
+        for(let i=0;i<rs.data.length;i++){
+          if(rs.data[i].key=='EMAIL'){
+
+          }
+        }
+      }
+    })
+  }
+
   LogOut(){
     this.userService.Logout().then((rs:any)=>{
       if(rs.status==0){
