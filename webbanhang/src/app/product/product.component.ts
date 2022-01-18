@@ -46,8 +46,8 @@ export class ProductComponent implements OnInit {
 
     this.lstSearchBy.push({id:'NAMEAZ',name:'Tên từ a -> z'});
     this.lstSearchBy.push({id:'NAMEZA',name:'Tên từ z -> a'});
-    this.lstSearchBy.push({id:'PRICEASC',name:'Giá giảm dần'});
-    this.lstSearchBy.push({id:'PRICEDES',name:'Giá tăng dần'});
+    this.lstSearchBy.push({id:'PRICEDES',name:'Giá giảm dần'});
+    this.lstSearchBy.push({id:'PRICEASC',name:'Giá tăng dần'});
 
 
     this.ItemRequest.code=this.route.snapshot.queryParamMap.get('c')||'';
@@ -89,7 +89,7 @@ export class ProductComponent implements OnInit {
 
   GetProductSort($event:any){
     this.ItemRequest.order=$event.id;
-    this.GetListProduct();
+    this.GetListProductAll();
   }
 
   CreateBreadCrumb(){

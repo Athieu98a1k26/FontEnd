@@ -151,6 +151,8 @@
                                   <div class="d-flex flex-column justify-content-start ml-2">
                                     <i class="fa fa-user cuser"></i>
                                     <span class="d-block font-weight-bold name">{{item.createByName}}</span>
+                                    &nbsp;
+                                    <app-Star style="display:inline-block" [numberStar]="item.star"></app-Star>
                                     <br />
                                     <span class="date text-black-50">Tạo ngày {{item.dateName}}</span>
                                   </div>

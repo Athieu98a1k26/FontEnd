@@ -106,10 +106,11 @@ export class OrderComponent implements OnInit {
     if(cartEntity.length>0)
     {
       //gọi xuống server xem còn hàng không, nếu không thì kệ
-    this.productService.CheckQuantity({ DataJson: JSON.stringify(cartEntity) }).then((rs: any) => {
+      this.productService.CheckQuantity({ DataJson: JSON.stringify(cartEntity) }).then((rs: any) => {
       if (rs.status == 0) {
         //sản phẩm vẫn còn hàng
         BaseLocalStorage.SetListOverideItemCart(cartEntity);
+        this.headerService.TriggerNotificationCountCart();
         this.routerNavigation.navigate(['/thanh-toan'], { relativeTo: this.route });
       }
       else {
@@ -149,8 +150,6 @@ export class OrderComponent implements OnInit {
     this.CheckIsCheckOut();
     let ItemCart = BaseLocalStorage.GetItemCart();
     //gọi xuống server xem còn hàng không, nếu không thì kệ
-
-
     if (ItemCart != null) {
       this.productService.GetListProductOrder({ DataJson: ItemCart }).then((rs: any) => {
         this.lstItemProductCart = rs;
